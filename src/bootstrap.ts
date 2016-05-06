@@ -2,25 +2,37 @@ import {bootstrap} from 'angular2/platform/browser';
 import {Component} from 'angular2/core';
 import {Header} from  './components/header';
 import {Body} from  './components/body';
+import {Countries} from  './components/countries';
+import {Footer} from './components/footer';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
 
 @Component({
   selector: 'app',
   template: `
     <header></header>
-   <body></body>
+   <router-outlet></router-outlet>
     <footer></footer>
   `,
   
   
-  directives : [Header,Body,ROUTER_DIRECTIVES]
+  directives : [Header,ROUTER_DIRECTIVES, Footer],
+   providers : [ROUTER_PROVIDERS]
 })
+
 @RouteConfig([
   {
     path: '/home',
     name: 'Home',
-    component: Body
-  }
+    component: Body,
+    useAsDefault: true 
+  },
+  
+   {
+    path: '/countries',
+    name: 'Countries',
+    component: Countries
+    
+  },
  
 ])
 export class App {}
